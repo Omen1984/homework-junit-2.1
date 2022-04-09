@@ -3,7 +3,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 
 public class PhoneBookTests {
     PhoneBook sut;
@@ -22,7 +24,7 @@ public class PhoneBookTests {
         // when:
         String result = sut.searchForContactByNumber(number);
         // then:
-        assertEquals(expected, result);
+        assertThat(result, equalTo(expected));
     }
 
     @Test
@@ -32,7 +34,7 @@ public class PhoneBookTests {
         // when:
         boolean result = sut.isFoundTheNumber(number);
         // then:
-        assertTrue(result);
+        assertThat(result, equalTo(true));
     }
 
     @Test
@@ -42,7 +44,7 @@ public class PhoneBookTests {
         // when:
         boolean result = sut.isFoundTheNumber(number);
         // then:
-        assertFalse(result);
+        assertThat(result, equalTo(false));
     }
 
     @ParameterizedTest
@@ -51,7 +53,17 @@ public class PhoneBookTests {
         // given:
         String result = sut.searchForContactByNumber(number);
         // then:
-        assertEquals(expected, result);
+        assertThat(result, equalTo(expected));
+    }
+
+    @Test
+    public void test_searchForContactByNumber_whenNotEqual_thenCorrect() {
+        // given:
+        String number = "89570420645", expected = "Контакт с таким номером отсутствует";
+        // when:
+        String result = sut.searchForContactByNumber(number);
+        // then:
+        assertThat(result, not(expected));
     }
 
 }
