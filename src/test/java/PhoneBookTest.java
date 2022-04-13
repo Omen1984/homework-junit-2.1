@@ -5,7 +5,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PhoneBookTests {
+public class PhoneBookTest {
     PhoneBook sut;
 
     @BeforeEach
@@ -53,5 +53,4 @@ public class PhoneBookTests {
         // then:
         assertEquals(expected, result);
     }
-
 }
